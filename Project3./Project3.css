@@ -4,7 +4,7 @@
 :root {
   --primary: #040d3f;
   --accent: rgb(211, 92, 254);
-  --background: #eeeeee;
+  --background: #f5f5f5;
   --card-bg: #ffffff;
   --radius: 14px;
   --transition: 300ms ease;
@@ -17,16 +17,19 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* =========================
    BODY
 ========================= */
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--background), #ffffff);
+  background: var(--background);
   color: #111827;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 /* =========================
@@ -34,38 +37,33 @@ body {
 ========================= */
 header {
   width: 100%;
-  max-width: 1400px;
   background: var(--primary);
   color: var(--accent);
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 30px;
-  border-radius: 0 0 var(--radius) var(--radius);
+  padding: 30px 20px;
+  text-align: center;
+  margin: 0;
 }
 
 header h1,
-header h2,
+header h2 {
+  color: var(--accent);
+  margin: 5px 0;
+  font-size: 1.8rem;
+}
+
 header p {
   color: var(--accent);
-  line-height: 1.4;
+  margin: 5px 0;
+  font-size: 1rem;
 }
 
-header h1 {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-}
-
-header h2 {
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-}
-
-/* Brand wrapper */
+/* Brand wrapper for logo pages */
 .brand {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 15px;
-  width: 100%;
+  flex-wrap: wrap;
 }
 
 /* =========================
@@ -85,31 +83,48 @@ header h2 {
   flex-shrink: 0;
 }
 
+.float {
+  /* Optional class for logo styling */
+}
+
 /* =========================
    MAIN LAYOUT
 ========================= */
 main {
-  width: 100%;
-  max-width: 1400px;
+  max-width: 900px;
+  margin: 40px auto;
   padding: 20px;
-  display: block;
-  margin: 0 auto;
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 main h1,
 main h2 {
-  margin-bottom: 20px;
   color: var(--primary);
+  margin: 25px 0 15px 0;
+}
+
+main h1 {
+  font-size: 2rem;
+}
+
+main h2 {
+  font-size: 1.6rem;
 }
 
 main p {
   line-height: 1.8;
   margin-bottom: 15px;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  color: #333;
 }
 
-main img {
-  margin: 20px 0;
+main > img {
+  display: block;
+  margin: 20px auto;
+  max-width: 400px;
+  border-radius: var(--radius);
 }
 
 /* =========================
@@ -118,80 +133,39 @@ main img {
 .image-row {
   display: flex;
   gap: 20px;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   margin: 30px 0;
 }
 
+.image-row img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* =========================
-   GRID LAYOUTS
+   GRID-3 LAYOUT (Side 2)
 ========================= */
 .grid-3 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-}
-
-/* =========================
-   ART PAGE GALLERY
-========================= */
-.art-page {
-  text-align: center;
-}
-
-.art-page h2 {
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
-  margin-bottom: 30px;
-}
-
-.art-gallery {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 30px;
-  justify-items: center;
-  margin-top: 30px;
-}
-
-/* =========================
-   WORK PAGE
-========================= */
-.work-page {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-}
-
-.work {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  text-align: center;
-}
-
-.work h2 {
-  color: var(--primary);
-  margin-bottom: 15px;
-  font-size: 1.5rem;
-}
-
-.work p {
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.work img,
-.work video {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
 }
 
-/* =========================
-   CONTACT PAGE
-========================= */
-.contact-page {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+@media (min-width: 768px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* =========================
@@ -201,25 +175,26 @@ main img {
   background: var(--card-bg);
   border-radius: var(--radius);
   padding: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  transition: transform var(--transition);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform var(--transition), box-shadow var(--transition);
   text-align: center;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.18);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 }
 
 .card h2 {
-  margin-bottom: 10px;
   color: var(--primary);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
+  margin: 10px 0;
 }
 
 .card p {
   line-height: 1.6;
-  margin-bottom: 15px;
+  margin: 10px 0 20px 0;
+  color: #555;
 }
 
 /* =========================
@@ -233,7 +208,7 @@ main img {
   font-weight: bold;
   border: 2px solid #6ec19d;
   color: #6ec19d;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 /* =========================
@@ -246,23 +221,151 @@ a {
 button,
 .btn {
   display: inline-block;
-  padding: 12px 24px;
-  border-radius: 12px;
+  padding: 12px 30px;
+  border-radius: 8px;
   border: none;
   background: #6ec19d;
   color: white;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: all 0.2s ease;
   margin-top: 10px;
 }
 
 button:hover,
 .btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
   background: #5da889;
+  transform: scale(1.05);
+}
+
+button:active,
+.btn:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   ART PAGE (Side 3)
+========================= */
+.art-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.art-page h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  color: var(--primary);
+}
+
+.art-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .art-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .art-gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.art-gallery img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* =========================
+   WORK PAGE (Side 4)
+========================= */
+.work-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .work-page {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .work-page {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.work {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform var(--transition);
+}
+
+.work:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.work h2 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.work p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.work img,
+.work video {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--radius);
+}
+
+/* =========================
+   CONTACT PAGE (Side 5)
+========================= */
+.contact-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+@media (min-width: 768px) {
+  .contact-page {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .contact-page {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* =========================
@@ -272,7 +375,7 @@ img,
 video {
   max-width: 100%;
   height: auto;
-  border-radius: 12px;
+  border-radius: var(--radius);
   display: block;
 }
 
@@ -290,109 +393,41 @@ footer {
 
 footer p {
   margin: 8px 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  color: var(--accent);
 }
 
 /* =========================
-   TABLET (768px - 1024px)
+   MOBILE OPTIMIZATION
 ========================= */
-@media (min-width: 768px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .art-gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .contact-page {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .work-page {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* =========================
-   DESKTOP (1024px+)
-========================= */
-@media (min-width: 1024px) {
+@media (max-width: 767px) {
   header {
-    padding: 40px;
+    padding: 20px 15px;
   }
 
-  main {
-    padding: 40px;
-  }
-
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .art-gallery {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-  }
-
-  .contact-page {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .work-page {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
-  }
-
-  main p {
-    font-size: 1.2rem;
-  }
-
-  .card {
-    padding: 30px;
-  }
-
-  .work {
-    padding: 35px;
-  }
-}
-
-/* =========================
-   LARGE DESKTOP (1400px+)
-========================= */
-@media (min-width: 1400px) {
-  .work-page {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* =========================
-   MOBILE (max 560px)
-========================= */
-@media (max-width: 560px) {
-  header {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
+  header h1,
+  header h2 {
+    font-size: 1.4rem;
   }
 
   .brand {
     flex-direction: column;
-    text-align: center;
   }
 
   main {
+    margin: 20px 10px;
     padding: 15px;
   }
 
-  main p {
-    font-size: 1rem;
+  main h1 {
+    font-size: 1.6rem;
   }
 
-  .card {
-    padding: 20px;
+  main h2 {
+    font-size: 1.3rem;
   }
 
+  .card,
   .work {
     padding: 20px;
   }
@@ -400,6 +435,39 @@ footer p {
   button,
   .btn {
     width: 100%;
+    padding: 15px;
+  }
+}
+
+/* =========================
+   DESKTOP OPTIMIZATION
+========================= */
+@media (min-width: 1200px) {
+  header {
+    padding: 40px 30px;
+  }
+
+  header h1,
+  header h2 {
+    font-size: 2.2rem;
+  }
+
+  main {
+    max-width: 1100px;
+    padding: 40px;
+    margin: 50px auto;
+  }
+
+  main h1 {
+    font-size: 2.4rem;
+  }
+
+  main h2 {
+    font-size: 1.8rem;
+  }
+
+  footer {
+    padding: 40px 30px;
   }
 }
 
@@ -407,11 +475,10 @@ footer p {
    ACCESSIBILITY
 ========================= */
 :focus {
-  outline: 3px solid var(--primary);
-  outline-offset: 4px;
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+:focus:not(:focus-visible) {
+  outline: none;
 }
